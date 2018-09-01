@@ -17,7 +17,7 @@ app.use("/api", indexRoute);
 
 // Route to send unmatched routes to React
 app.use("*", function(req,res) {
-    res.sendFile(__dirname + "client/build/index.html");
+    res.sendFile(__dirname + "/client/build/index.html");
 })
 
 app.listen(API_PORT, function() {
