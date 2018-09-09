@@ -16,6 +16,6 @@ const GIASchema = new Schema({
             hours: String
         }]
     }]
-});
+}); 
 
 module.exports = mongoose.model("GIAEmployee", GIASchema);
