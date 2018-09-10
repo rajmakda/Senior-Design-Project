@@ -7,6 +7,7 @@ var config = require("./config.js");
 
 // Requiring routes
 var indexRoute = require("./server/routes/index");
+var authRoute = require("./server/routes/auth");
 var timesheetRoutes = require("./server/routes/Timesheet");
 
 var app = express();
@@ -26,6 +27,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error')).catch(er
 
 // Route for GIA Timesheets
 app.use("/api/timesheet",timesheetRoutes);
+// Route for Authentication
+app.use("/api", authRoute);
 // Dummy index route for API
 app.use("/api", indexRoute);
 
