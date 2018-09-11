@@ -26,7 +26,7 @@ class Signup extends Component {
             lastname: this.state.lastname,
             typeofuser: "resident"
         }
-        fetch('/api/register', {
+        fetch('/api/auth/register', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
@@ -47,25 +47,25 @@ class Signup extends Component {
         return (
             <div className="container text-center">
                 <form className="form-signin" onSubmit={this.handleSubmit}>
-                    <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+                    <h1 className="h3 mb-3 font-weight-normal">Please sign up</h1>
                     <div className="form-group">
-                        <label for="sjsuid" className="sr-only">SJSU ID</label>
-                        <input type="text" name="sjsuid" className="form-control" value={this.state.sjsuid} placeholder="Enter SJSU ID" onChange={this.handleInputChange} required autofocus/>
+                        <label htmlFor="sjsuid" className="sr-only">SJSU ID</label>
+                        <input type="text" name="sjsuid" className="form-control" value={this.state.sjsuid} placeholder="Enter SJSU ID" onChange={this.handleInputChange} required autoFocus/>
                     </div>
                     <div className="form-group">
-                        <label for="firstname" className="sr-only">First Name</label>
-                        <input type="text" name="firstname" className="form-control" value={this.state.firstname} placeholder="Enter First Name" onChange={this.handleInputChange} required autofocus/>
+                        <label htmlFor="firstname" className="sr-only">First Name</label>
+                        <input type="text" name="firstname" className="form-control" value={this.state.firstname} placeholder="Enter First Name" onChange={this.handleInputChange} required autoFocus/>
                     </div>
                     <div className="form-group">
-                        <label for="lastname" className="sr-only">Last Name</label>
-                        <input type="text" name="lastname" className="form-control" value={this.state.lastname} placeholder="Enter Last Name" onChange={this.handleInputChange} required autofocus/>
+                        <label htmlFor="lastname" className="sr-only">Last Name</label>
+                        <input type="text" name="lastname" className="form-control" value={this.state.lastname} placeholder="Enter Last Name" onChange={this.handleInputChange} required autoFocus/>
                     </div>
                     <div className="form-group">
-                        <label for="email" className="sr-only">Email Address</label>
-                        <input type="email" name="email" className="form-control" value={this.state.email} placeholder="Enter Email" onChange={this.handleInputChange} required autofocus/>
+                        <label htmlFor="email" className="sr-only">Email Address</label>
+                        <input type="email" name="email" className="form-control" value={this.state.email} placeholder="Enter Email" onChange={this.handleInputChange} required autoFocus/>
                     </div>
                     <div className="form-group">
-                        <label for="password" className="sr-only">Password</label>
+                        <label htmlFor="password" className="sr-only">Password</label>
                         <input type="password" name="password" className="form-control" value={this.state.password} placeholder="Password" onChange={this.handleInputChange} required/>
                     </div>
                     <button type="submit" className="btn btn-lg btn-primary btn-block">Submit</button>

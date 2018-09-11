@@ -28,7 +28,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error')).catch(er
 // Route for GIA Timesheets
 app.use("/api/timesheet",timesheetRoutes);
 // Route for Authentication
-app.use("/api", authRoute);
+app.use("/api/auth", authRoute);
 // Dummy index route for API
 app.use("/api", indexRoute);
 
