@@ -4,6 +4,7 @@ var User = require("../models/User");
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var config = require("../../config");
+var middleware = require('../middleware/index');
 
 router.post("/login", function(req, res, next) {
     User.findOne({ email: req.body.email }, function (err, user) {
@@ -38,19 +39,11 @@ router.post("/register", function(req, res, next) {
     });
 });
 
-router.get("/me", function(req, res, next) {
-    var token = req.headers['x-access-token'];
-    if (!token) {
-        return res.status(401).send({auth : false, message: "No token provided"});
-    }
-    jwt.verify(token, config.secretkey, function(err, decoded) {
-        if (err) return res.status(500).send({auth : false, message: "Failed to authenticate token"});
-        // res.status(200).send(decoded);
-        User.findById(decoded.id, {password : 0} ,function(err, user) {
-            if (err) return res.status(500).send("There was a problem finding the user");
-            if (!user) return res.status(404).send("No such user found");
-            res.status(200).send(user);
-        });
+router.get("/me", middleware.verifyToken ,function(req, res, next) {
+    User.findById(req.userId, {password : 0} ,function(err, user) {
+        if (err) return res.status(500).send("There was a problem finding the user");
+        if (!user) return res.status(404).send("No such user found");
+        res.status(200).send(user);
     });
 });
 

@@ -1,9 +1,10 @@
 var express = require("express");
 var router = express.Router();
 var GIAEmployee = require("../models/GIA");
+var middleware = require('../middleware/index');
 
 // Route to add a new timesheet for a GIA given sjsu id
-router.post("/:id",function(req, res, next) {
+router.post("/:id", middleware.verifyToken ,function(req, res, next) {
     let timeperiod = req.body.timeperiod;
     timeperiod.from = new Date(req.body.timeperiod.from);
     timeperiod.to = new Date(req.body.timeperiod.to);
@@ -23,7 +24,7 @@ router.post("/:id",function(req, res, next) {
 });
 
 // Route to get timesheets for all GIAs for a given time period
-router.get("/:from/:to", function(req, res, next) {
+router.get("/:from/:to", middleware.verifyToken, middleware.checkAdmin, function(req, res, next) {
     let from = new Date(req.params.from);
     let to = new Date(req.params.to);
     let timesheets = [];
