@@ -25,11 +25,20 @@ class Login extends Component {
                 "Content-Type": "application/json; charset=utf-8",
             },
             body: JSON.stringify(credentials)
-        }).then(res => res.json()).catch(err => console.log(err))
+        }).then(res => {
+            if(res.status === 200 || res.status === 401) return res.json();
+            if(res.status === 404 || res.status === 500) return res.text();
+        }).catch(err => console.log(err))
             .then(res => {
                 console.log(res);
+                if (res.auth === true) {
+                    this.props.history.push("/");
+                } else if (res.auth === false) {
+                    alert("Invalid password");
+                } else {
+                    alert(res);
+                }
             }).catch(err => console.log(err))
-        this.props.history.push("/");
     }
 
     handleInputChange (event) {
