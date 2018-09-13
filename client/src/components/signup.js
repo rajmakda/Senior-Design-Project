@@ -32,11 +32,17 @@ class Signup extends Component {
                 "Content-Type": "application/json; charset=utf-8",
             },
             body: JSON.stringify(data)
-        }).then(res => res.json()).catch(err => console.log(err))
+        }).then(res => {
+            if(res.status === 500) return res.text();
+            return res.json(); 
+        }).catch(err => console.log(err))
             .then(res => {
-                console.log(res);
+                if(res.auth === true) {
+                    this.props.history.push("/");
+                } else {
+                    alert(res);
+                }
             }).catch(err => console.log(err))
-        this.props.history.push("/");
     }
 
     handleInputChange (event) {

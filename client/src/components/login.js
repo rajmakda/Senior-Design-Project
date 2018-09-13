@@ -30,7 +30,6 @@ class Login extends Component {
             if(res.status === 404 || res.status === 500) return res.text();
         }).catch(err => console.log(err))
             .then(res => {
-                console.log(res);
                 if (res.auth === true) {
                     this.props.history.push("/");
                 } else if (res.auth === false) {
