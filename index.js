@@ -19,6 +19,7 @@ app.use(express.static(__dirname + "/client/build"));
 
 // Mongoose connection
 const dburl = process.env.DBURL || `mongodb+srv://${config.dbconfig.username}:${config.dbconfig.password}@cluster0-ymruv.mongodb.net/ihouseapp`;
+// const dburl = 'mongodb://localhost:27017/ihouseapp'
 mongoose.connect(dburl, { useNewUrlParser: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error')).catch(err => {
@@ -39,7 +40,7 @@ app.use("*", function(req,res) {
 // Error handler
 app.use(function (err, req, res, next) {
     console.error(err);
-    res.status(500).json({ err });
+    res.status(500).json({ "err": err.message });
 })
 
 app.listen(API_PORT, function() {
