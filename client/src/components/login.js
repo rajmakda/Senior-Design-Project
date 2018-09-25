@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './login.css';
+
 class Login extends Component {
 
     constructor(props) {
@@ -7,7 +8,7 @@ class Login extends Component {
 
         this.state = {
             email:"",
-            password:""
+            password:"",
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -31,6 +32,9 @@ class Login extends Component {
         }).catch(err => console.log(err))
             .then(res => {
                 if (res.auth === true) {
+                    localStorage.setItem("auth", res.auth);
+                    localStorage.setItem("token",res.token);
+                    // const { from } = this.props.location.state || { from: { pathname: '/' } }
                     this.props.history.push("/");
                 } else if (res.auth === false) {
                     alert("Invalid password");
