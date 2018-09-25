@@ -47,6 +47,10 @@ router.get("/me", middleware.verifyToken ,function(req, res, next) {
     });
 });
 
+router.get("/verifyToken", middleware.verifyToken, function(req, res, next) {
+    res.status(200).send({auth: true, userId: req.userId});
+});
+
 router.get("/logout", function(req, res, next) {
     res.status(200).send({auth : false, token: null});
 });

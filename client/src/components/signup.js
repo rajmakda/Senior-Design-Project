@@ -38,6 +38,8 @@ class Signup extends Component {
         }).catch(err => console.log(err))
             .then(res => {
                 if(res.auth === true) {
+                    localStorage.setItem("auth", res.auth);
+                    localStorage.setItem("token", res.token);
                     this.props.history.push("/");
                 } else {
                     alert(res);
