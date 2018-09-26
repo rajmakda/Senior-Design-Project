@@ -1,5 +1,6 @@
-import './App.css';
-import React from "react"
+import React, { Component } from "react";
+import "./App.css";
+import { Link } from "react-router-dom";
 
 class App extends React.Component {
   state = {
@@ -31,69 +32,19 @@ handleSubmit = (e) => {
 render() {
     let {owner, description, work} = this.state
     return (
-        
-      <form onSubmit={this.handleSubmit} onChange={this.handleChange} >
-       <h1>&emsp;Work Log</h1>
-       <h2 className="header">Date&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
-	     Job Description&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	     Time In/Out&emsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;
-	     Hours Worked
-         </h2>
-        {
-          work.map((val, idx)=> {
-            let dateId = `date-${idx}`, jobId = `job-${idx}`, timeId = `time-${idx}`, hoursId = `hours-${idx}`
-            return (
-              <div key={idx}>
-               
-                <input
-                  type="text"
-                  size="15"
-                  date={dateId}
-                  data-id={idx}
-                  id={dateId}
-                  value={work[idx].date} 
-                  className="date"
-                />
-                
-                <input
-                  type="text"
-                  size="40"
-                  date={jobId}
-                  data-id={idx}
-                  id={jobId}
-                  value={work[idx].job} 
-                  className="job"
-                />
-                 
-                <input
-                  type="text"
-                  size="15"
-                  date={timeId}
-                  data-id={idx}
-                  id={timeId}
-                  value={work[idx].time} 
-                  className="time"
-                />
-                
-                <input
-                  type="text"
-                  size="15"
-                  date={hoursId}
-                  data-id={idx}
-                  id={hoursId}
-                  value={work[idx].hours} 
-                  className="hours"
-                />
-                <p></p>
-              </div>
-            )
-          })
-        }
-   
-        <input type="button" className="button" value="+" onClick={this.addRow}/>
-        <input className="button3" type="submit" value="Submit" /> 
-      </form>
-    )
+      <div className="App">
+        <header className="App-header">
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
+        <p className="App-intro">
+          To get started, edit <code>src/App.js</code> and save to reload.
+        </p>
+        <div>
+          <h1> Links </h1>
+          <Link to="/schedule">Schedule</Link>
+        </div>
+      </div>
+    );
   }
 }
 export default App
