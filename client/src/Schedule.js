@@ -7,7 +7,7 @@ class Schedule extends Component {
   render() {
     return (
       <div className="Schedule">
-        <div class="container-fluid">
+        <div className="container-fluid">
           <header>
             <h1 className="Schedule-title">GIA Schedule</h1>
           </header>
@@ -17,9 +17,9 @@ class Schedule extends Component {
           This component will allow you to create schedule for the GIA jobs.
         </p>
 
-        <div class="dropdown">
+        <div className="dropdown">
           <button
-            class="btn btn-secondary dropdown-toggle"
+            className="btn btn-secondary dropdown-toggle"
             type="button"
             id="dropdownMenuButton"
             data-toggle="dropdown"
@@ -28,8 +28,8 @@ class Schedule extends Component {
           >
             GIA Job
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">
+          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a className="dropdown-item" href="#">
               Evening Receptionist
             </a>
             <a class="dropdown-item" href="#">
