@@ -1,9 +1,13 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import "./Schedule.css";
 
 import { Link } from "react-router-dom";
 
 class Schedule extends Component {
+
+
+
   render() {
     return (
       <div className="Schedule">
@@ -32,7 +36,7 @@ class Schedule extends Component {
             <a className="dropdown-item" href="#">
               Evening Receptionist
             </a>
-            <a class="dropdown-item" href="#">
+            <a className="dropdown-item" href="#">
               Office Aide
             </a>
           </div>
