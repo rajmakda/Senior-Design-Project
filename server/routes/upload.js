@@ -8,9 +8,13 @@ var GIAEmployee = require("../models/GIA");
 var upload = multer({dest: "server/uploads/"});
 
 router.post("/gia", upload.single("file"), function(req, res, next) {
-    console.log(req.file);
     const file = req.file;
-    const workbook = xlsx.readFile("server/uploads/"+file.filename);
+    let workbook;
+    try {
+        workbook = xlsx.readFile("server/uploads/"+file.filename);
+    } catch (err) {
+        return next(new Error("No file selected"));
+    }
     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
     var data = xlsx.utils.sheet_to_json(worksheet);
     let bulkInstructions = [];
@@ -35,7 +39,6 @@ router.post("/gia", upload.single("file"), function(req, res, next) {
         instruction.updateOne.update = employee;
         bulkInstructions.push(instruction);
     });
-    console.log(bulkInstructions);
     GIAEmployee.bulkWrite(bulkInstructions)
     .catch(function(err) {
         next(err);
