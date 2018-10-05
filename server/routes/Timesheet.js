@@ -1,29 +1,26 @@
 var express = require("express");
 var router = express.Router();
 var GIAEmployee = require("../models/GIA");
+var middleware = require('../middleware/index');
 
 // Route to add a new timesheet for a GIA given sjsu id
-router.post("/:id",function(req, res, next) {
+router.post("/:id", middleware.verifyToken ,function(req, res, next) {
     let timeperiod = req.body.timeperiod;
-    timeperiod.from = new Date(req.body.timeperiod.from);
-    timeperiod.to = new Date(req.body.timeperiod.to);
-    // let timeperiodFrom = new Date(req.body.timeperiod.from);
-    // let timeperiodTo = new Date(req.body.timeperiod.to);
-    // timeperiod.from = (timeperiodFrom.getMonth() + 1) + '/' + timeperiodFrom.getDate() + '/' + timeperiodFrom.getFullYear();
-    // timeperiod.to = (timeperiodTo.getMonth() + 1) + '/' + timeperiodTo.getDate() + '/' + timeperiodTo.getFullYear();
+    timeperiod.from = new Date(req.body.timeperiod.from).toISOString();
+    timeperiod.to = new Date(req.body.timeperiod.to).toISOString();
     let worklog = req.body.worklog;
     let timesheet = {
         "timeperiod":timeperiod,
         "worklog":worklog
     }
-    GIAEmployee.updateOne({ sjsuid: req.params.id }, { "$push": {timesheets:timesheet}}, {upsert: true}, function(err, response) {
+    GIAEmployee.findOneAndUpdate({ sjsuid: req.params.id }, { "$push": {timesheets:timesheet}},{upsert:true}, function(err, response) {
         if (err) return next(err)
         return res.json({"ok":"Mongo update successful"});
     })
 });
 
 // Route to get timesheets for all GIAs for a given time period
-router.get("/:from/:to", function(req, res, next) {
+router.get("/:from/:to", middleware.verifyToken, middleware.checkAdmin, function(req, res, next) {
     let from = new Date(req.params.from);
     let to = new Date(req.params.to);
     let timesheets = [];
@@ -32,12 +29,12 @@ router.get("/:from/:to", function(req, res, next) {
         {$match: {
             $and: [{
                 "timesheets.timeperiod.from": {
-                    $eq: from
+                    $gte: from
                 }
             },
             {
                 "timesheets.timeperiod.to": {
-                    $eq: to
+                    $lte: to
                 }
             }]
         }}
