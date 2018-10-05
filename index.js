@@ -9,10 +9,11 @@ var config = require("./config.js");
 var indexRoute = require("./server/routes/index");
 var authRoute = require("./server/routes/auth");
 var timesheetRoutes = require("./server/routes/Timesheet");
+var uploadRoutes = require("./server/routes/upload");
 
 var app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json({limit:"50mb"}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true}));
 const API_PORT = process.env.API_PORT || 3001;
 //Serving production build of React using Express
 app.use(express.static(__dirname + "/client/build"));
@@ -30,6 +31,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error')).catch(er
 app.use("/api/timesheet",timesheetRoutes);
 // Route for Authentication
 app.use("/api/auth", authRoute);
+// Route for Uploading fies
+app.use("/api/upload", uploadRoutes);
 // Dummy index route for API
 app.use("/api", indexRoute);
 
