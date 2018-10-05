@@ -1,3 +1,5 @@
 node_modules/
 client/build
 config.js
+uploads/
+.DS_Store

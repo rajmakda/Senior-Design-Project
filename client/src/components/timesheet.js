@@ -41,7 +41,11 @@ class timesheet extends Component {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
+<<<<<<< HEAD
                 "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViYTgzNWRkNjJjZTk4MWEyOGJlMzhhOCIsImlhdCI6MTUzNzc1MDUzNiwiZXhwIjoxNTM3ODM2OTM2fQ.Ou46RCxy66euMob4TeL_45LUnBeIuXIVUYtlFGw0GBo"
+=======
+                "x-access-token": `${localStorage.getItem('token')}`
+>>>>>>> 1cae637fdbb37fa39e177c95781f68810634cde8
             },
             body: JSON.stringify(data)
         }).then(res => {

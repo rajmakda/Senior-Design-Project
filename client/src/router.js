@@ -36,7 +36,11 @@ import timesheet from './components/timesheet';
 //     }
 // }
 
+<<<<<<< HEAD
 const userisAuthenticated = localStorage.getItem("auth")
+=======
+const userisAuthenticated = (localStorage.getItem("auth") === 'true');
+>>>>>>> 1cae637fdbb37fa39e177c95781f68810634cde8
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) => (
         userisAuthenticated
