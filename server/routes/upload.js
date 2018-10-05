@@ -13,6 +13,7 @@ router.post("/gia", upload.single("file"), function(req, res, next) {
     const workbook = xlsx.readFile("server/uploads/"+file.filename);
     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
     var data = xlsx.utils.sheet_to_json(worksheet);
+    let bulkInstructions = [];
     data.map(function(item) {
         var availability = {}
         item["Monday"] != undefined ? availability.mon = item["Monday"].split(";") : availability.mon = []
@@ -24,12 +25,27 @@ router.post("/gia", upload.single("file"), function(req, res, next) {
         item["Sunday"] != undefined ? availability.sun = item["Sunday"].split(";") : availability.sun = []
         var employee = {
             email: item["What is your e-mail address? "],
+            name: item["Name"],
             availability: availability
         }
-        
+        let instruction = {}
+        instruction.updateOne = {};
+        instruction.updateOne.filter = {sjsuid: item["SJSU ID"]};
+        instruction.updateOne.upsert = true;
+        instruction.updateOne.update = employee;
+        bulkInstructions.push(instruction);
     });
-
-    res.status(200).send("ok");
+    console.log(bulkInstructions);
+    GIAEmployee.bulkWrite(bulkInstructions)
+    .catch(function(err) {
+        next(err);
+    })
+    .then(function(response) {
+        return res.status(200).send({"ok":"Successfully uploaded data"})
+    })
+    .catch(function(err) {
+        next(err);
+    })
 });
 
 module.exports = router;

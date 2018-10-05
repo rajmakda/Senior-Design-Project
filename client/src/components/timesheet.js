@@ -26,17 +26,6 @@ class timesheet extends Component {
             },
             worklog : this.state.worklog
         }
-        // let worklog = []
-        // for (var i=1;i<=this.state.noOfRows;i++) {
-        //      worklog.push({
-        //          date: this.state.date+`${i}`,
-        //          job: this.state.job+`${i}`,
-        //          time: this.state.time+`${i}`,
-        //          hours: this.state.hours+`${i}`
-        //      })
-        // }
-        // console.log(worklog);
-        // data.worklog = worklog;
         fetch(`/api/timesheet/${this.state.sjsuid}`,{
             method: 'POST',
             headers: {
@@ -50,7 +39,7 @@ class timesheet extends Component {
             .then(res => {
                 if (res.err) return alert(res.err);
                 if (res.auth === false) return alert(res.message);
-                if (res.ok) alert("Successfully updated timesheet");
+                if (res.ok) {alert("Successfully updated timesheet"); this.props.history.push("/");}
             }).catch(err => console.log(err))
     }
 
