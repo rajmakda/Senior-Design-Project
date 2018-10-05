@@ -1,10 +1,10 @@
-import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import React from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 
-import App from './App';
-import Login from './components/login';
-import Signup from './components/signup';
-import timesheet from './components/timesheet';
+import App from "./App";
+import Login from "./components/login";
+import Signup from "./components/signup";
+import timesheet from "./components/timesheet";
 
 // async function isAuthenticated() {
 //     if (localStorage.getItem("token") !== null) {
@@ -36,31 +36,34 @@ import timesheet from './components/timesheet';
 //     }
 // }
 
-<<<<<<< HEAD
-const userisAuthenticated = localStorage.getItem("auth")
-=======
-const userisAuthenticated = (localStorage.getItem("auth") === 'true');
->>>>>>> 1cae637fdbb37fa39e177c95781f68810634cde8
+const userisAuthenticated = localStorage.getItem("auth") === "true";
 const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={(props) => (
-        userisAuthenticated
-            ? <Component {...props} />
-            : <Redirect to={{
-                pathname: '/login',
-                state: { from: props.location }
-            }} />
-    )} />
-)
+  <Route
+    {...rest}
+    render={props =>
+      userisAuthenticated ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: { from: props.location }
+          }}
+        />
+      )
+    }
+  />
+);
 
 const Router = () => (
-    <main>
-        <Switch>
-            <Route path='/login' component={Login} />
-            <Route path='/register' component={Signup} />
-            <PrivateRoute path='/timesheet' component={timesheet} />
-            <Route path='/' component={App} />
-        </Switch>
-    </main>
-)
+  <main>
+    <Switch>
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Signup} />
+      <PrivateRoute path="/timesheet" component={timesheet} />
+      <Route path="/" component={App} />
+    </Switch>
+  </main>
+);
 
 export default Router;

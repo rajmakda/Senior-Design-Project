@@ -16,7 +16,9 @@ class Nav_Bar extends React.Component {
           <Navbar.Brand href="#home">I-House</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="/home">Home</Nav.Link>
-            <Nav.Link href="/timesheet">Timesheet</Nav.Link>
+            <NavDropdown title="GIA" id="nav-dropdown">
+              <NavDropdown.Item href="/timesheet">Timesheet</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
           <Form inline>
             <Button variant="outline-success" href="/login">
