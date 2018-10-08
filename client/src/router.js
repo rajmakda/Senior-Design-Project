@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import App from './App';
+import Schedule from './Schedule';
 import Login from './components/login';
 import Signup from './components/signup';
 import timesheet from './components/timesheet';
@@ -51,6 +52,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 const Router = () => (
     <main>
         <Switch>
+          <Route path='/schedule' component={Schedule} />
             <Route path='/login' component={Login} />
             <Route path='/register' component={Signup} />
             <PrivateRoute path='/timesheet' component={timesheet} />
