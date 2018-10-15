@@ -6,6 +6,9 @@ import Schedule from './Schedule';
 import Login from './components/login';
 import Signup from './components/signup';
 import timesheet from './components/timesheet';
+import DisplayTimesheets from './components/timesheet/DisplayTimesheets';
+import { Provider } from 'react-redux';
+import store from './store';
 
 // async function isAuthenticated() {
 //     if (localStorage.getItem("token") !== null) {
@@ -51,13 +54,16 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 const Router = () => (
     <main>
-        <Switch>
-          <Route path='/schedule' component={Schedule} />
-            <Route path='/login' component={Login} />
-            <Route path='/register' component={Signup} />
-            <PrivateRoute path='/timesheet' component={timesheet} />
-            <Route path='/' component={App} />
-        </Switch>
+        <Provider store={ store }>
+            <Switch>
+            <Route path='/schedule' component={Schedule} />
+                <Route path='/login' component={Login} />
+                <Route path='/register' component={Signup} />
+                <PrivateRoute path='/timesheet' component={timesheet} />
+                <PrivateRoute path='/display-timesheet' component={DisplayTimesheets}/>
+                <Route path='/' component={App} />
+            </Switch>
+        </Provider>
     </main>
 )
 

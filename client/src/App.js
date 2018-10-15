@@ -18,7 +18,6 @@ class App extends Component {
         })
     }
   render() {
-      let {owner, description, work} = this.state
       return (
         <div className="App">
           <header className="App-header">
@@ -28,6 +27,7 @@ class App extends Component {
             <a href="/login">Login</a><br/>
             <a href="/timesheet">Timesheet</a><br />
             <a href="/register">Register</a><br/>
+            <a href="/display-timesheet">Display Timesheets</a><br/>
             <button className="btn btn-link" onClick={this.handleLogout}>Logout</button>
           </p>
           <div>
