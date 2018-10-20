@@ -133,12 +133,12 @@ class timesheet extends Component {
                             <FormControl id="sjsuid" onChange={this.handleInputChange} required placeholder="SJSU ID" />
                         </FormGroup>
                         <FormGroup className="col-md-4">
-                            <FormLabel>To</FormLabel>
-                            <FormControl id="to" onChange={this.handleInputChange} type="date" required />
-                        </FormGroup>
-                        <FormGroup className="col-md-4">
                             <FormLabel>From</FormLabel>
                             <FormControl id="from" onChange={this.handleInputChange} type="date" required />
+                        </FormGroup>
+                        <FormGroup className="col-md-4">
+                            <FormLabel>To</FormLabel>
+                            <FormControl id="to" onChange={this.handleInputChange} type="date" required />
                         </FormGroup>
                     </Row>
                     <Row>

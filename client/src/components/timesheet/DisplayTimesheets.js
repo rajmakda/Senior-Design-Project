@@ -6,12 +6,12 @@ import TimeSheetTable from './TimesheetTable';
 
 class DisplayTimesheets extends Component {
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
 
-        this.setState = {
-            fromDate: "",
-            toDate: ""
+        this.state = {
+            fromDate: '',
+            toDate: ''
         }
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -21,14 +21,14 @@ class DisplayTimesheets extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        //this.props.getTimeSheets();
-        console.log('Submitted');
-        console.log(e.target.name);
+        this.props.getTimeSheets(this.state.fromDate, this.state.toDate);
     }
 
     handleInputChange (event) {
         this.setState({[event.target.name]: event.target.value});
     }
+
+    // Function here to render the TimeSheetTable 
 
   render() {
     return (
@@ -41,15 +41,15 @@ class DisplayTimesheets extends Component {
             <Row>
                 <FormGroup className="col-md-3">
                     <FormLabel>From</FormLabel>
-                    <FormControl name="from" value={this.state.fromDate} type="date" onChange={this.handleInputChange} required/>
+                    <FormControl name="fromDate" type="date" value={this.state.fromDate} onChange={this.handleInputChange} required/>
                 </FormGroup>
                 <FormGroup className="col-md-3">
                     <FormLabel>To</FormLabel>
-                    <FormControl name="to" value={this.state.toDate} type="date" onChange={this.handleInputChange} required/>
+                    <FormControl name="toDate" type="date" value={this.state.toDate} onChange={this.handleInputChange} required/>
                 </FormGroup>
             </Row>
             <Row>
-                <Button variant="success" type="submit">Submit</Button>
+                <Button variant="success" style={{marginRight:'1%'}} type="submit">Submit</Button>
             </Row>
         </Form>
         <TimeSheetTable />
