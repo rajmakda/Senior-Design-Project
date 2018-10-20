@@ -27,6 +27,7 @@ class App extends Component {
           <a href="/login">Login</a><br/>
           <a href="/timesheet">Timesheet</a><br />
           <a href="/register">Register</a><br/>
+          <a href="/gia">Upload Data</a><br/>
           <button className="btn btn-link" onClick={this.handleLogout}>Logout</button>
         </p>
       </div>
