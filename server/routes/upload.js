@@ -7,7 +7,7 @@ var GIAEmployee = require("../models/GIA");
 
 var upload = multer({dest: "server/uploads/"});
 
-router.post("/gia", upload.single("file"), function(req, res, next) {
+router.post("/gia", middleware.checkAdmin, upload.single("file"), function(req, res, next) {
     const file = req.file;
     let workbook;
     try {

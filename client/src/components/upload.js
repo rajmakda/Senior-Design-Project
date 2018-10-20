@@ -17,18 +17,19 @@ class Upload extends React.Component {
         }).catch(err => alert(err))
         .then(res => {
             return res.json();
-        }).then(res => {
+        }).catch(err => console.log(err))
+        .then(res => {
             if (res.err) return alert(res.err);
             return alert(res.ok);
-        })
+        }).catch(err => console.log(err))
     }
 
     render() {
         return(
             <div className="container">
                 <form onSubmit={this.handleSubmit}>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
+                    <div className="input-group">
+                        <div className="input-group-prepend">
                             <button type="Submit" className="btn btn-outline-secondary" id="inputGroupFileAddon04">Upload</button>
                         </div>
                         <div className="custom-file">

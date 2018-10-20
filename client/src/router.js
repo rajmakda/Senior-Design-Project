@@ -6,6 +6,7 @@ import Login from './components/login';
 import Signup from './components/signup';
 import timesheet from './components/timesheet';
 import upload from './components/upload';
+import schedule from './components/schedule';
 
 const userisAuthenticated = (localStorage.getItem("auth") === 'true');
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -26,6 +27,7 @@ const Router = () => (
             <Route path='/register' component={Signup} />
             <PrivateRoute path='/timesheet' component={timesheet} />
             <PrivateRoute path='/gia' component={upload} />
+            <PrivateRoute path='/schedule' component={schedule} />
             <Route path='/' component={App} />
         </Switch>
     </main>
