@@ -13,14 +13,19 @@ class Upload extends React.Component {
         formData.append("file", this.fileInput.current.files[0]);
         fetch("/api/upload/gia", {
             method: "POST",
-            body: formData
+            body: formData,
+            headers: {
+                "x-access-token": `${localStorage.getItem('token')}`
+            }
         }).catch(err => alert(err))
         .then(res => {
             return res.json();
         }).catch(err => console.log(err))
         .then(res => {
+            if (res.ok) return alert(res.ok);
             if (res.err) return alert(res.err);
-            return alert(res.ok);
+            if (res.message) return alert(res.message);
+            alert(res);
         }).catch(err => console.log(err))
     }
 
