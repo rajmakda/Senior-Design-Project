@@ -28,6 +28,7 @@ class NavBar extends React.Component {
               <NavDropdown.Item href="/timesheet">Worklog</NavDropdown.Item>
               <NavDropdown.Item href="/schedule">Schedule</NavDropdown.Item>
               <NavDropdown.Item href="/gia">Upload</NavDropdown.Item>
+              <NavDropdown.Item href="/display-timesheet">View all timesheets</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Form inline>
