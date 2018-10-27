@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import "./App.css";
-import NavBar from "./components/Nav_Bar.js";
+import NavBar from "./Nav_Bar.js";
 
 import Carousel from "react-bootstrap/lib/Carousel";
 
-class App extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.handleLogout = this.handleLogout.bind(this);
@@ -24,15 +23,20 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar />
-        <div style={{ width: "800px", margin: "auto" }}>
-          <Carousel interval="6000">
+        <div>
+          <Carousel
+            interval={6000}
+            style={{ width: 600, height: 600, margin: "auto" }}
+          >
             <Carousel.Item>
               <img
                 className="d-block w-100"
-                src={require("./images/image1.jpg")}
+                src={require("../images/image1.jpg")}
                 alt="First slide"
               />
-              <Carousel.Caption>
+              <Carousel.Caption
+                style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+              >
                 <h3>First slide label</h3>
                 <p>
                   Nulla vitae elit libero, a pharetra augue mollis interdum.
@@ -42,8 +46,8 @@ class App extends Component {
             <Carousel.Item>
               <img
                 className="d-block w-100"
-                src={require("./images/image2.jpg")}
-                alt="Third slide"
+                src={require("../images/image2.jpg")}
+                alt="Second slide"
               />
 
               <Carousel.Caption>
@@ -54,7 +58,7 @@ class App extends Component {
             <Carousel.Item>
               <img
                 className="d-block w-100"
-                src={require("./images/image3.jpg")}
+                src={require("../images/image3.jpg")}
                 alt="Third slide"
               />
 
@@ -68,20 +72,9 @@ class App extends Component {
             </Carousel.Item>
           </Carousel>
         </div>
-        <p className="App-intro">
-          <a href="/login">Login</a>
-          <br />
-          <a href="/timesheet">Timesheet</a>
-          <br />
-          <a href="/register">Register</a>
-          <br />
-          <button className="btn btn-link" onClick={this.handleLogout}>
-            Logout
-          </button>
-        </p>
       </div>
     );
   }
 }
 
-export default App;
+export default Home;

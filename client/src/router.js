@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import App from "./App";
+import Home from "./components/home";
 import Login from "./components/login";
 import Signup from "./components/signup";
 import timesheet from "./components/timesheet";
@@ -60,8 +60,9 @@ const Router = () => (
     <Switch>
       <Route path="/login" component={Login} />
       <Route path="/register" component={Signup} />
+      <Route path="/register" component={Signup} />
       <PrivateRoute path="/timesheet" component={timesheet} />
-      <Route path="/" component={App} />
+      <Route path="/" component={Home} />
     </Switch>
   </main>
 );

@@ -184,16 +184,17 @@ class timesheet extends Component {
               <p className="col">Date</p>
               <p className="col">Job Done</p>
               <p className="col">Time In/Out</p>
-              <p className="col">Total Hours</p>
+              <p className="col">Hours</p>
             </Row>
             {this.createRows()}
             <Button
               variant="outline-success"
-              style={{ marginRight: "1%" }}
+              style={{ margin: "auto" }}
               onClick={this.addRow}
             >
               +
             </Button>
+
             <Button variant="success" type="submit">
               Submit
             </Button>
