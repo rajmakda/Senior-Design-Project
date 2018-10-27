@@ -3,3 +3,4 @@ client/build
 config.js
 uploads/
 .DS_Store
+jsconfig.json

@@ -15,9 +15,6 @@ const GIASchema = new Schema({
             time: String,
             hours: String
         }]
-<<<<<<< HEAD
-    }]
-=======
     }],
     availability: {
         mon: [String],
@@ -28,7 +25,6 @@ const GIASchema = new Schema({
         sat: [String],
         sun: [String]
     }
->>>>>>> 1cae637fdbb37fa39e177c95781f68810634cde8
 }); 
 
 module.exports = mongoose.model("GIAEmployee", GIASchema);

@@ -29,20 +29,12 @@ router.get("/:from/:to", middleware.verifyToken, middleware.checkAdmin, function
         {$match: {
             $and: [{
                 "timesheets.timeperiod.from": {
-<<<<<<< HEAD
-                    $eq: from
-=======
                     $gte: from
->>>>>>> 1cae637fdbb37fa39e177c95781f68810634cde8
                 }
             },
             {
                 "timesheets.timeperiod.to": {
-<<<<<<< HEAD
-                    $eq: to
-=======
                     $lte: to
->>>>>>> 1cae637fdbb37fa39e177c95781f68810634cde8
                 }
             }]
         }}
