@@ -20,9 +20,9 @@ middleware.verifyToken = function(req, res, next) {
 middleware.checkAdmin = function(req, res, next) {
     var userId = req.userId;
     User.findById(userId, {password : 0}, function(err, user) {
-        if (err) return res.status(500).send("There was a problem finding the user");
-        if (!user) return res.status(404).send("No such user found");
-        if (user.typeofuser !== "admin") return res.status(401).send("You are not authorized to access this");
+        if (err) return res.status(500).send({message:"There was a problem finding the user"});
+        if (!user) return res.status(404).send({message:"No such user found"});
+        if (user.typeofuser !== "admin") return res.status(401).send({message: "You are not authorized to access this"});
         next();
     })
 }
