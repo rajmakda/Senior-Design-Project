@@ -24,45 +24,31 @@ class timesheet extends Component {
     this.handleWorklogHoursChange = this.handleWorklogHoursChange.bind(this);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    let data = {
-      timeperiod: {
-        from: this.state.from,
-        to: this.state.to
-      },
-      worklog: this.state.worklog
-    };
-    // let worklog = []
-    // for (var i=1;i<=this.state.noOfRows;i++) {
-    //      worklog.push({
-    //          date: this.state.date+`${i}`,
-    //          job: this.state.job+`${i}`,
-    //          time: this.state.time+`${i}`,
-    //          hours: this.state.hours+`${i}`
-    //      })
-    // }
-    // console.log(worklog);
-    // data.worklog = worklog;
-    fetch(`/api/timesheet/${this.state.sjsuid}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        "x-access-token": `${localStorage.getItem("token")}`
-      },
-      body: JSON.stringify(data)
-    })
-      .then(res => {
-        return res.json();
-      })
-      .catch(err => console.log(err))
-      .then(res => {
-        if (res.err) return alert(res.err);
-        if (res.auth === false) return alert(res.message);
-        if (res.ok) alert("Successfully updated timesheet");
-      })
-      .catch(err => console.log(err));
-  }
+    handleSubmit(event) {
+        event.preventDefault();
+        let data = {
+            timeperiod: {
+                from: this.state.from,
+                to: this.state.to
+            },
+            worklog : this.state.worklog
+        }
+        fetch(`/api/timesheet/${this.state.sjsuid}`,{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "x-access-token": `${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(data)
+        }).then(res => {
+            return res.json();
+            }).catch(err => console.log(err))
+            .then(res => {
+                if (res.err) return alert(res.err);
+                if (res.auth === false) return alert(res.message);
+                if (res.ok) {alert("Successfully updated timesheet"); this.props.history.push("/");}
+            }).catch(err => console.log(err))
+    }
 
   handleInputChange(event) {
     this.setState({ [event.target.id]: event.target.value });
