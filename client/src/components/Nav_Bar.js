@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown, Form, Button } from "react-bootstrap";
 
-class Nav_Bar extends React.Component {
+class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.handleLogout = this.handleLogout.bind(this);
@@ -49,4 +49,4 @@ class Nav_Bar extends React.Component {
   }
 }
 
-export default Nav_Bar;
+export default NavBar;
