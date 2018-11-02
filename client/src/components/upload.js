@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBar from '../components/Nav_Bar';
 
 class Upload extends React.Component {
     constructor(props) {
@@ -31,18 +32,21 @@ class Upload extends React.Component {
 
     render() {
         return(
-            <div className="container">
-                <form onSubmit={this.handleSubmit}>
-                    <div className="input-group">
-                        <div className="input-group-prepend">
-                            <button type="Submit" className="btn btn-outline-secondary" id="inputGroupFileAddon04">Upload</button>
+            <div>
+                <NavBar />
+                <div className="container">
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="input-group">
+                            <div className="input-group-prepend">
+                                <button type="Submit" className="btn btn-outline-secondary" id="inputGroupFileAddon04">Upload</button>
+                            </div>
+                            <div className="custom-file">
+                                <input type="file" className="custom-file-input" id="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ref={this.fileInput} aria-describedby="inputGroupFileAddon04" />
+                                <label htmlFor="file" className="custom-file-label">Choose file to upload GIA data</label>
+                            </div>
                         </div>
-                        <div className="custom-file">
-                            <input type="file" className="custom-file-input" id="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ref={this.fileInput} aria-describedby="inputGroupFileAddon04"/>
-                            <label htmlFor="file" className="custom-file-label">Choose file to upload GIA data</label>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         )
     }
