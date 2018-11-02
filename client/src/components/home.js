@@ -23,16 +23,16 @@ class Home extends Component {
     return (
       <div className="App">
         <NavBar />
-        <div>
-          <Carousel
-            interval={6000}
-            style={{ width: 600, height: 600, margin: "auto" }}
-          >
+        <div style={{ backgroundColor: "black" }}>
+          <Carousel interval={6000} style={{ width: "900px", margin: "auto" }}>
             <Carousel.Item>
               <img
                 className="d-block w-100"
                 src={require("../images/image1.jpg")}
                 alt="First slide"
+                style={{
+                  objectFit: "contain"
+                }}
               />
               <Carousel.Caption
                 style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
@@ -48,9 +48,14 @@ class Home extends Component {
                 className="d-block w-100"
                 src={require("../images/image2.jpg")}
                 alt="Second slide"
+                style={{
+                  objectFit: "contain"
+                }}
               />
 
-              <Carousel.Caption>
+              <Carousel.Caption
+                style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+              >
                 <h3>Second slide label</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </Carousel.Caption>
@@ -60,9 +65,14 @@ class Home extends Component {
                 className="d-block w-100"
                 src={require("../images/image3.jpg")}
                 alt="Third slide"
+                style={{
+                  objectFit: "contain"
+                }}
               />
 
-              <Carousel.Caption>
+              <Carousel.Caption
+                style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+              >
                 <h3>Third slide label</h3>
                 <p>
                   Praesent commodo cursus magna, vel scelerisque nisl

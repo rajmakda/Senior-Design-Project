@@ -18,6 +18,19 @@ class NavBar extends React.Component {
   };
 
   render() {
+    this.state = {};
+
+    const isLoggedIn = (
+      <Button variant="outline-success" onClick={this.handleLogout}>
+        Logout
+      </Button>
+    );
+    const isLoggedOut = (
+      <Button variant="outline-success" href="/login">
+        Login
+      </Button>
+    );
+
     return (
       <div>
         <Navbar bg="dark" variant="dark">
@@ -28,21 +41,17 @@ class NavBar extends React.Component {
               <NavDropdown.Item href="/timesheet">Worklog</NavDropdown.Item>
               <NavDropdown.Item href="/schedule">Schedule</NavDropdown.Item>
               <NavDropdown.Item href="/gia">Upload</NavDropdown.Item>
-              <NavDropdown.Item href="/display-timesheet">View all timesheets</NavDropdown.Item>
+              <NavDropdown.Item href="/display-timesheet">
+                View all timesheets
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Form inline>
             <Button variant="outline-success" href="/register">
               Sign Up
             </Button>
-
-            <Button variant="outline-success" href="/login">
-              Login
-            </Button>
-
-            <Button variant="outline-success" onClick={this.handleLogout}>
-              Logout
-            </Button>
+            {/*logged in or logged out*/}
+            {this.state.isLoggedIn ? isLoggedIn : isLoggedOut}
           </Form>
         </Navbar>
       </div>
