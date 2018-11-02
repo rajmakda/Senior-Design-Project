@@ -13,7 +13,7 @@ class TimesheetTable extends Component {
     if (this.props.timesheets.timesheets === null) {
         return (
             <div>
-                No timesheets
+                Please select dates above
             </div>
         )
     } else {

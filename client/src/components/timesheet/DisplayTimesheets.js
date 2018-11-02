@@ -28,7 +28,6 @@ class DisplayTimesheets extends Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    // Function here to render the TimeSheetTable 
 
   render() {
     return (
