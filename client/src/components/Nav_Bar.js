@@ -5,8 +5,18 @@ class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.handleLogout = this.handleLogout.bind(this);
+    this.state = {
+      isLoggedIn: false
+    }
+    this.renderAuthButtons = this.renderAuthButtons.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({
+      isLoggedIn: (localStorage.getItem('auth') == 'true')
+    })
+  }
+ 
   handleLogout = () => {
     fetch("/api/auth/logout")
       .then(res => res.json())
@@ -16,6 +26,21 @@ class NavBar extends React.Component {
         window.location.reload();
       });
   };
+
+  renderAuthButtons() {
+    if (this.state.isLoggedIn) {
+      return (
+        <Button variant="outline-light" onClick={this.handleLogout}>Logout</Button>
+      )
+    } else {
+      return (
+        <div>
+          <Button variant="outline-light" href="/register" className="mr-sm-2">Sign Up</Button>
+          <Button variant="outline-light" href="/login">Login</Button>
+        </div>
+      )
+    }
+  }
 
   render() {
     return (
@@ -31,19 +56,7 @@ class NavBar extends React.Component {
               <NavDropdown.Item href="/display-timesheet">View all timesheets</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Form inline>
-            <Button variant="outline-success" href="/register">
-              Sign Up
-            </Button>
-
-            <Button variant="outline-success" href="/login">
-              Login
-            </Button>
-
-            <Button variant="outline-success" onClick={this.handleLogout}>
-              Logout
-            </Button>
-          </Form>
+          {this.renderAuthButtons()}
         </Navbar>
       </div>
     );
