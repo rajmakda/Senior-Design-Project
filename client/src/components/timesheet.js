@@ -114,7 +114,7 @@ class timesheet extends Component {
         return (
             <div>
                 <NavBar />
-                <div className='container'>
+                <div className='container-fluid'>
                     <div className='jumbotron'>
                         <h1 className='display-4'>Grant-In-Aid Time-Sheet</h1>
                     </div>

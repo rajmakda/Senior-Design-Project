@@ -45,7 +45,8 @@ class Schedule extends Component {
             su_4_6:[],
             su_6_11:[],
             loading: true,
-            schedule: {}
+            schedule: {},
+            semester: "Fall 2018"
             
         }
         this.handleSelect = (employee, meta) => {
@@ -55,7 +56,22 @@ class Schedule extends Component {
         }
 
         this.submitSchedule = () => {
-            alert("Schedule saved successfully");
+            let data = {
+                semester: this.state.semester,
+                schedule: this.state.schedule
+            };
+            fetch("/api/schedule", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    'x-access-token': localStorage.getItem('token')
+                },
+                body: JSON.stringify(data)
+            }).then(res => { return res.json(); }).catch(err => { console.log(err); alert("Failed to make request") })
+            .then(res => {
+                console.log(res);
+                alert("Schedule saved successfully");
+            }).catch(err => alert(err))
         }
     }   
 
@@ -228,6 +244,21 @@ class Schedule extends Component {
                 <div className="container-fluid">
                     <div className='jumbotron'>
                         <h1 className='display-4'>Pick a schedule for GIAs</h1>
+                    </div>
+                    <div style={{marginBottom: '5px'}}>
+                        <Dropdown onSelect={(eventKey, event) => {
+                            this.setState({semester: event.target.innerHTML})}}
+                            >
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                {this.state.semester}
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item eventKey="1">Fall 2018</Dropdown.Item>
+                                <Dropdown.Item eventKey="2">Spring 2019</Dropdown.Item>
+                                <Dropdown.Item eventKey="3">Summer 2019</Dropdown.Item>
+                                <Dropdown.Item eventKey="4">Fall 2019</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </div>
                     <div>
                         <Table responsive="sm" hover>
