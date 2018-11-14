@@ -85,7 +85,7 @@ class Schedule extends Component {
                 return res.json();
             }).catch(err => console.log(err))
             .then(res => {
-                if (res.message) alert(res.message)
+                if (res.message) { alert(res.message); return window.location.replace("/") }
                 if(res.availableUser) {
                     this.setState({giaEmployees: res.availableUser})
                     this.segregateEmployeesByDay(this.state.giaEmployees)

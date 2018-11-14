@@ -6,33 +6,21 @@ import Carousel from "react-bootstrap/lib/Carousel";
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.handleLogout = this.handleLogout.bind(this);
   }
-
-  handleLogout = () => {
-    fetch("/api/auth/logout")
-      .then(res => res.json())
-      .then(res => {
-        localStorage.setItem("auth", res.auth);
-        localStorage.setItem("token", res.token);
-        window.location.reload();
-      });
-  };
 
   render() {
     return (
       <div className="App">
         <NavBar />
         <div>
-          <Carousel
-            interval={6000}
-            style={{ width: 600, height: 600, margin: "auto" }}
-          >
+          <Carousel>
             <Carousel.Item>
               <img
-                className="d-block w-100"
+                className="d-block w-100 img-responsive"
                 src={require("../images/image1.jpg")}
                 alt="First slide"
+                width={700}
+                height={800}
               />
               <Carousel.Caption
                 style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
@@ -48,6 +36,8 @@ class Home extends Component {
                 className="d-block w-100"
                 src={require("../images/image2.jpg")}
                 alt="Second slide"
+                width={700}
+                height={800}
               />
 
               <Carousel.Caption>
@@ -60,6 +50,8 @@ class Home extends Component {
                 className="d-block w-100"
                 src={require("../images/image3.jpg")}
                 alt="Third slide"
+                width={700}
+                height={800}
               />
 
               <Carousel.Caption>

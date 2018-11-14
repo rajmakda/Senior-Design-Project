@@ -6,14 +6,17 @@ class NavBar extends React.Component {
     super(props);
     this.handleLogout = this.handleLogout.bind(this);
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      userIsAdmin: false
     }
     this.renderAuthButtons = this.renderAuthButtons.bind(this);
+    this.renderAdminButtons = this.renderAdminButtons.bind(this);
   }
 
   componentDidMount() {
     this.setState({
-      isLoggedIn: (localStorage.getItem('auth') == 'true')
+      isLoggedIn: (localStorage.getItem('auth') == 'true'),
+      userIsAdmin: (localStorage.getItem('auth') == 'true') && JSON.parse(localStorage.getItem("user")).typeofuser == "admin"
     })
   }
  
@@ -43,19 +46,33 @@ class NavBar extends React.Component {
     }
   }
 
+  renderAdminButtons() {
+    if (this.state.userIsAdmin) {
+      return (
+        <span style={{display: "flex"}}>
+          <Nav.Link href="/timesheet">Worklog</Nav.Link>
+          <Nav.Link href="/schedule">Schedule</Nav.Link>
+          <Nav.Link href="/gia">Upload</Nav.Link>
+          <Nav.Link href="/display-timesheet">Timesheets</Nav.Link>
+        </span>
+      )
+    } else if (this.state.isLoggedIn) {
+        return (
+          <Nav.Link href="/timesheet">Worklog</Nav.Link>
+        )
+    } else {
+      return 
+    }
+  }
+
   render() {
     return (
       <div>
-        <Navbar bg="dark" variant="dark">
+        <Navbar bg="dark" variant="dark" expand="sm">
           <Navbar.Brand href="#home">I-House</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="/home">Home</Nav.Link>
-            <NavDropdown title="GIA" id="nav-dropdown">
-              <NavDropdown.Item href="/timesheet">Worklog</NavDropdown.Item>
-              <NavDropdown.Item href="/schedule">Schedule</NavDropdown.Item>
-              <NavDropdown.Item href="/gia">Upload</NavDropdown.Item>
-              <NavDropdown.Item href="/display-timesheet">View all timesheets</NavDropdown.Item>
-            </NavDropdown>
+              {this.renderAdminButtons()}
           </Nav>
           {this.renderAuthButtons()}
         </Navbar>

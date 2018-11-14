@@ -36,9 +36,10 @@ class Login extends Component {
                     localStorage.setItem("auth", res.auth);
                     localStorage.setItem("token",res.token);
                     let promise = Promise.resolve(fetch("/api/auth/me", {headers: {"x-access-token": res.token}}))
-                    promise.then(res => res.json()).then(res => localStorage.setItem("user", JSON.stringify(res)));
-                    // const { from } = this.props.location.state || { from: { pathname: '/' } }
-                    this.props.history.push("/");
+                    promise.then(res => res.json()).then(res => {
+                        localStorage.setItem("user", JSON.stringify(res));
+                        this.props.history.push("/"); 
+                    });                   
                 } else if (res.auth === false) {
                     alert("Invalid password");
                 } else {
