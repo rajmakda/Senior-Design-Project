@@ -35,7 +35,8 @@ class Login extends Component {
                 if (res.auth === true) {
                     localStorage.setItem("auth", res.auth);
                     localStorage.setItem("token",res.token);
-                    localStorage.setItem("user", res.user);
+                    let promise = Promise.resolve(fetch("/api/auth/me", {headers: {"x-access-token": res.token}}))
+                    promise.then(res => res.json()).then(res => localStorage.setItem("user", JSON.stringify(res)));
                     // const { from } = this.props.location.state || { from: { pathname: '/' } }
                     this.props.history.push("/");
                 } else if (res.auth === false) {

@@ -23,6 +23,7 @@ class NavBar extends React.Component {
       .then(res => {
         localStorage.setItem("auth", res.auth);
         localStorage.setItem("token", res.token);
+        localStorage.setItem("user", null);
         window.location.reload();
       });
   };

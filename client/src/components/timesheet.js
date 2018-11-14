@@ -8,8 +8,21 @@ class timesheet extends Component {
         super(props);
         this.state = {
             noOfRows: 1,
-            worklog: []
+            worklog: [],
+            sjsuid: JSON.parse(localStorage.getItem("user")).sjsuid,
+            to: new Date().toDateInputValue(),
         }
+
+        if (new Date().getDate() <= 15) {
+            var date = new Date();
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+            this.state.from = firstDay.toDateInputValue()
+        } else {
+            var date = new Date();
+            var fifteenthDay = new Date(date.getFullYear(), date.getMonth(), 15);
+            this.state.from = fifteenthDay.toDateInputValue()
+        }
+        
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleWorklogDateChange = this.handleWorklogDateChange.bind(this)
@@ -89,19 +102,15 @@ class timesheet extends Component {
             rows.push(
                 <Row key={i}>
                     <FormGroup className="col">
-                        {/* <FormLabel>Date</FormLabel> */}
                         <FormControl id={i + ""} type="date" onChange={this.handleWorklogDateChange} />
                     </FormGroup>
                     <FormGroup className="col">
-                        {/* <FormLabel>Job Done</FormLabel> */}
                         <FormControl id={i + ""} onChange={this.handleWorklogJobChange} />
                     </FormGroup>
                     <FormGroup className="col">
-                        {/* <FormLabel>Time In/Out</FormLabel> */}
                         <FormControl id={i + ""} onChange={this.handleWorklogTimeChange} />
                     </FormGroup>
                     <FormGroup className="col">
-                        {/* <FormLabel>Total Hours</FormLabel> */}
                         <FormControl id={i + ""} onChange={this.handleWorklogHoursChange} />
                     </FormGroup>
                 </Row>
@@ -122,15 +131,15 @@ class timesheet extends Component {
                         <Row>
                             <FormGroup className="col-md-4">
                                 <FormLabel>SJSU ID</FormLabel>
-                                <FormControl id="sjsuid" onChange={this.handleInputChange} required placeholder="SJSU ID" />
-                            </FormGroup>
-                            <FormGroup className="col-md-4">
-                                <FormLabel>To</FormLabel>
-                                <FormControl id="to" onChange={this.handleInputChange} type="date" required />
+                                <FormControl id="sjsuid" onChange={this.handleInputChange} required placeholder="SJSU ID" value={this.state.sjsuid}/>
                             </FormGroup>
                             <FormGroup className="col-md-4">
                                 <FormLabel>From</FormLabel>
-                                <FormControl id="from" onChange={this.handleInputChange} type="date" required />
+                                <FormControl id="from" onChange={this.handleInputChange} type="date" required value={this.state.from} />
+                            </FormGroup>
+                            <FormGroup className="col-md-4">
+                                <FormLabel>To</FormLabel>
+                                <FormControl id="to" onChange={this.handleInputChange} type="date" required value={this.state.to} />
                             </FormGroup>
                         </Row>
                         <Row>
@@ -150,3 +159,9 @@ class timesheet extends Component {
 }
 
 export default timesheet;
+
+Date.prototype.toDateInputValue = (function () {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0, 10);
+});
