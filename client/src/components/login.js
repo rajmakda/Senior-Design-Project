@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Navbar from './Nav_Bar';
 import './login.css';
 
 class Login extends Component {
@@ -34,6 +35,7 @@ class Login extends Component {
                 if (res.auth === true) {
                     localStorage.setItem("auth", res.auth);
                     localStorage.setItem("token",res.token);
+                    localStorage.setItem("user", res.user);
                     // const { from } = this.props.location.state || { from: { pathname: '/' } }
                     this.props.history.push("/");
                 } else if (res.auth === false) {
@@ -50,19 +52,22 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="container text-center">
-                <form className="form-signin" onSubmit={this.handleSubmit}>
-                    <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-                    <div className="form-group">
-                        <label htmlFor="email" className="sr-only">Email Address</label>
-                        <input type="email" name="email" className="form-control" value={this.state.email} placeholder="Enter Email" onChange={this.handleInputChange} required autoFocus/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password" className="sr-only">Password</label>
-                        <input type="password" name="password" className="form-control" value={this.state.password} placeholder="Password" onChange={this.handleInputChange} required/>
-                    </div>
-                    <button type="submit" className="btn btn-lg btn-primary btn-block">Submit</button>
-                </form>
+            <div>
+                <Navbar/>
+                <div className="container-fluid text-center">
+                    <form className="form-signin" onSubmit={this.handleSubmit}>
+                        <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+                        <div className="form-group">
+                            <label htmlFor="email" className="sr-only">Email Address</label>
+                            <input type="email" name="email" className="form-control" value={this.state.email} placeholder="Enter Email" onChange={this.handleInputChange} required autoFocus />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password" className="sr-only">Password</label>
+                            <input type="password" name="password" className="form-control" value={this.state.password} placeholder="Password" onChange={this.handleInputChange} required />
+                        </div>
+                        <button type="submit" className="btn btn-lg btn-primary btn-block">Submit</button>
+                    </form>
+                </div>
             </div>
         );
     }
