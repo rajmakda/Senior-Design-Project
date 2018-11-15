@@ -10,7 +10,6 @@ class timesheet extends Component {
             noOfRows: 1,
             worklog: [],
             sjsuid: JSON.parse(localStorage.getItem("user")).sjsuid,
-            to: new Date().toDateInputValue(),
         }
 
         if (new Date().getDate() <= 15) {
@@ -21,6 +20,16 @@ class timesheet extends Component {
             var date = new Date();
             var fifteenthDay = new Date(date.getFullYear(), date.getMonth(), 15);
             this.state.from = fifteenthDay.toDateInputValue()
+        }
+
+        if (new Date().getDate() <= 15) {
+            var date = new Date();
+            var from = new Date(date.getFullYear(), date.getMonth(), 15);
+            this.state.to = from.toDateInputValue()
+        } else {
+            var date = new Date();
+            var lastDay = new Date(date.getFullYear(), date.getMonth(), 0);
+            this.state.to = lastDay.toDateInputValue()
         }
         
         this.handleSubmit = this.handleSubmit.bind(this)
