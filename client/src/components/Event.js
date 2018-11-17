@@ -60,15 +60,17 @@ class Event extends Component {
                             Organized by <cite title="Source Title">{event.owner}</cite>
                         </footer>
                     </Card.Body>
-                    <Card.Footer>
                     {
                         (this.state.userIsAdmin || this.state.userIsRA) ?
+                        <Card.Footer>
+
                         <ButtonToolbar>
                             <Button size="sm" style={{ marginRight: '1%' }}>Update</Button>
                             <Button variant="danger" size="sm" onClick={this.handleDelete}>Delete</Button>
-                        </ButtonToolbar>: null
+                        </ButtonToolbar>
+                        </Card.Footer>
+                            : null
                     }
-                    </Card.Footer>
                 </Card>
         );
     }
