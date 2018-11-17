@@ -17,7 +17,10 @@ class AddEvent extends Component {
             title: "",
             description: "",
             imgPath: "",
-            owner: ""
+            owner: "",
+            isLoggedIn: "",
+            isRA: "",
+            isAdmin: ""
         }
         this.fileInput = React.createRef();
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,6 +29,33 @@ class AddEvent extends Component {
 
     handleInputChange(event) {
         this.setState({ [event.target.id]: event.target.value })
+    }
+
+    componentDidMount() {
+        this.setState({
+            isLoggedIn: localStorage.getItem('auth') == 'true',
+            isRA: localStorage.getItem('user').typeofuser == 'RA',
+            isAdmin: localStorage.getItem('user').typeofuser == 'admin'
+        })
+        let eventId = this.props.eventid;
+        if (eventId != undefined && (this.state.isAdmin || this.state.isRA)) {
+            let url = "/api/event/"+eventId
+            fetch(url, {
+                headers: {
+                    "x-access-token": localStorage.getItem('token')
+                }
+            }).then(res => {return res.json()})
+            .then(res => {
+                let date = new Date(res.when)
+                this.setState({
+                    when: date.toDateInputValue(),
+                    where: res.where,
+                    title: res.title,
+                    description: res.description,
+                    owner: res.owner
+                })
+            })
+        }
     }
 
     handleSubmit(e) {
@@ -37,12 +67,19 @@ class AddEvent extends Component {
             description: this.state.description,
             owner: this.state.owner,
         }
+        let eventId = this.props.eventid
+        let method = "POST"
+        let url = "/api/event/"        
+        if (eventId != undefined) {
+            method = "PUT"
+            url = url + eventId
+        }
         let img = this.fileInput.current.files[0];
         let formData = new FormData();
         formData.append("img", img);
         formData.append("event", JSON.stringify(event));
-        fetch("/api/event", {
-            method: "POST",
+        fetch(url, {
+            method: method,
             body: formData,
             headers: {
                 "x-access-token": `${localStorage.getItem('token')}`
@@ -64,7 +101,7 @@ class AddEvent extends Component {
             <Modal {...this.props} aria-labelledby="contained-modal-title-vcenter" centered>
                 <ModalHeader closeButton>
                     <ModalTitle id="contained-modal-title-vcenter">
-                        Create a new Event
+                        {this.props.title}
                     </ModalTitle>
                 </ModalHeader>
                 <ModalBody>
@@ -123,3 +160,9 @@ class AddEvent extends Component {
 }
 
 export default AddEvent;
+
+Date.prototype.toDateInputValue = (function () {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0, 10);
+});

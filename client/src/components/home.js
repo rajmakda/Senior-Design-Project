@@ -50,7 +50,7 @@ class Home extends Component {
     return (
       <div>
         <NavBar />
-        <div className="container-fluid" style={{marginTop: '2%'}}>
+        <div className="container-fluid" style={{marginTop: '6%'}}>
           {
             this.state.events.length > 0 ?
               <CardColumns>

@@ -241,11 +241,11 @@ class Schedule extends Component {
         return (
             <div>
                 <NavBar />
-                <div className='jumbotron'>
+                <div className='jumbotron' style={{ marginTop: '4%' }}>
                     <h1 className='display-4'>Pick a schedule for GIAs</h1>
                 </div>
                 <div className="container-fluid">
-                    <div style={{marginBottom: '5px'}}>
+                    <div style={{marginBottom: '10px'}}>
                         <Dropdown onSelect={(eventKey, event) => {
                             this.setState({semester: event.target.innerHTML})}}
                             >

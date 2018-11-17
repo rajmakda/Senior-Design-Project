@@ -60,7 +60,7 @@ class Signup extends Component {
         return (
             <div>
                 <Navbar/>
-                <div className="container-fluid text-center">
+                <div className="container-fluid text-center" style={{ marginTop: '6%' }}>
                     <form className="form-signin" onSubmit={this.handleSubmit}>
                         <h1 className="h3 mb-3 font-weight-normal">Please sign up</h1>
                         <div className="form-group">

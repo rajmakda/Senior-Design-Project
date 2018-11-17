@@ -132,7 +132,7 @@ class timesheet extends Component {
         return (
             <div>
                 <NavBar />
-                <div className='jumbotron'>
+                <div className='jumbotron' style={{marginTop: '4%'}}>
                     <h1 className='display-4'>Grant-In-Aid Time-Sheet</h1>
                 </div>
                 <div className='container-fluid'>

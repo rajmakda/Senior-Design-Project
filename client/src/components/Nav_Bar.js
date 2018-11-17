@@ -10,7 +10,6 @@ class NavBar extends React.Component {
       isLoggedIn: false,
       userIsAdmin: false,
       userIsRA: false,
-      creatEvenModelShow: false
     }
     this.renderAuthButtons = this.renderAuthButtons.bind(this);
     this.renderAdminButtons = this.renderAdminButtons.bind(this);
@@ -77,7 +76,7 @@ class NavBar extends React.Component {
           <Nav.Link onClick={() => this.setState({ modalShow: true })}>
               Create Event
           </Nav.Link>
-        <AddEvent show={this.state.modalShow} onHide={modalClose} />
+        <AddEvent show={this.state.modalShow} onHide={modalClose} title="Create a new event"/>
         </div>
       );
     } else {
@@ -87,8 +86,7 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <div>
-        <Navbar bg="dark" variant="dark" expand="sm">
+        <Navbar bg="dark" variant="dark" expand="sm" fixed="top" >
           <Navbar.Brand href="#home">I-House</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="/home">Home</Nav.Link>
@@ -97,7 +95,6 @@ class NavBar extends React.Component {
           </Nav>
           {this.renderAuthButtons()}
         </Navbar>
-      </div>
     );
   }
 }

@@ -64,9 +64,19 @@ router.delete("/:id", middleware.verifyToken ,middleware.checkRAorAdmin, functio
     })
 });
 
-router.put("/:id", middleware.verifyToken, middleware.checkRAorAdmin, function(req, res) {
+router.get("/:id", middleware.verifyToken ,middleware.checkRAorAdmin, function(req, res) {
     let id = req.params.id;
-    let event = req.body.event
+    Event.findById(id, function(err, e) {
+        if (err) return next(err);
+        return res.send(e)
+    })
+});
+
+router.put("/:id", middleware.verifyToken, middleware.checkRAorAdmin, upload.single("img") ,function(req, res) {
+    let id = req.params.id;
+    let event = JSON.parse(req.body.event);
+    let img = req.file;
+    event.imgPath = img.path;
     Event.findByIdAndUpdate(id,event,function(err, eve) {
         if (err) return next(err);
         return res.send(eve);

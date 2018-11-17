@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import Card from 'react-bootstrap/lib/Card';
 import Button from 'react-bootstrap/lib/Button';
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
+import AddEvent from './AddEvent'
 
 
 class Event extends Component {
     constructor(props) {
         super(props);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
         this.state = {
             userIsAdmin: false,
-            userIsRA: false
+            userIsRA: false,
+            updateEventModelShow: false
         }
+        this.modalClose = () => this.setState({ modalShow: false });
+
     }
 
     componentDidMount() {
@@ -39,12 +44,17 @@ class Event extends Component {
         }).catch(err => console.log(err));
     }
 
+    handleUpdate() {
+       this.setState({modalShow: true})
+    }
+
     render() {
         let event = this.props.event;
         let date = new Date(event.when);
         let dateString = date.toDateString(0);
         let imgPath = "/api/event/image/"+event.imgPath.split("/").pop();
         return (
+            <div>
                 <Card>
                     <Card.Img variant="top" src={imgPath} width={350} height={350}/>
                     <Card.Body>
@@ -65,13 +75,15 @@ class Event extends Component {
                         <Card.Footer>
 
                         <ButtonToolbar>
-                            <Button size="sm" style={{ marginRight: '1%' }}>Update</Button>
+                            <Button size="sm" onClick={this.handleUpdate} style={{ marginRight: '1%' }}>Update</Button>
                             <Button variant="danger" size="sm" onClick={this.handleDelete}>Delete</Button>
                         </ButtonToolbar>
                         </Card.Footer>
                             : null
                     }
                 </Card>
+            <AddEvent show={this.state.modalShow} onHide={this.modalClose} title="Edit event" eventid={event._id}/>
+        </div>
         );
     }
 }

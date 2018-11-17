@@ -47,7 +47,7 @@ class Upload extends React.Component {
         return(
             <div>
                 <NavBar />
-                <div className='jumbotron'>
+                <div className='jumbotron' style={{ marginTop: '4%' }}>
                     <h1 className='display-4'>Upload Data for GIA Applications</h1>
                 </div>
                 <div className="container-fluid">
