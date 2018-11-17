@@ -27,4 +27,24 @@ middleware.checkAdmin = function(req, res, next) {
     })
 }
 
+middleware.checkRA = function(req, res, next ) {
+    var userId = req.userId;
+    User.findById(userId, {password: 0}, function(err, user) {
+        if (err) return res.status(500).send({message: "There was a problem finding the user"});
+        if (!user) return res.status(404).send({message: "No such user found"});
+        if (user.typeofuser !== "RA") return res.status(401).send({message: "You are not authorized to access this"});
+        next();
+    });
+}
+
+middleware.checkRAorAdmin = function (req, res, next) {
+    var userId = req.userId;
+    User.findById(userId, { password: 0 }, function (err, user) {
+        if (err) return res.status(500).send({ message: "There was a problem finding the user" });
+        if (!user) return res.status(404).send({ message: "No such user found" });
+        if (user.typeofuser !== "RA" && user.typeofuser !== "admin") return res.status(401).send({ message: "You are not authorized to access this" });
+        next();
+    });
+}
+
 module.exports = middleware;

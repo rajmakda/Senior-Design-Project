@@ -241,10 +241,10 @@ class Schedule extends Component {
         return (
             <div>
                 <NavBar />
+                <div className='jumbotron'>
+                    <h1 className='display-4'>Pick a schedule for GIAs</h1>
+                </div>
                 <div className="container-fluid">
-                    <div className='jumbotron'>
-                        <h1 className='display-4'>Pick a schedule for GIAs</h1>
-                    </div>
                     <div style={{marginBottom: '5px'}}>
                         <Dropdown onSelect={(eventKey, event) => {
                             this.setState({semester: event.target.innerHTML})}}

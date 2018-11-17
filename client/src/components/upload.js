@@ -47,11 +47,10 @@ class Upload extends React.Component {
         return(
             <div>
                 <NavBar />
-                
+                <div className='jumbotron'>
+                    <h1 className='display-4'>Upload Data for GIA Applications</h1>
+                </div>
                 <div className="container-fluid">
-                    <div className='jumbotron'>
-                        <h1 className='display-4'>Upload Data for GIA Applications</h1>
-                    </div>
                     <form onSubmit={this.handleSubmit}>
                         <div className="input-group">
                             <div className="input-group-prepend">

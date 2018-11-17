@@ -132,10 +132,10 @@ class timesheet extends Component {
         return (
             <div>
                 <NavBar />
+                <div className='jumbotron'>
+                    <h1 className='display-4'>Grant-In-Aid Time-Sheet</h1>
+                </div>
                 <div className='container-fluid'>
-                    <div className='jumbotron'>
-                        <h1 className='display-4'>Grant-In-Aid Time-Sheet</h1>
-                    </div>
                     <Form onSubmit={this.handleSubmit}>
                         <Row>
                             <FormGroup className="col-md-4">

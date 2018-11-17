@@ -11,6 +11,8 @@ var authRoute = require("./server/routes/auth");
 var timesheetRoutes = require("./server/routes/Timesheet");
 var uploadRoutes = require("./server/routes/upload");
 var scheduleRoutes = require("./server/routes/schedule");
+var eventRoutes = require("./server/routes/events");
+var userRoutes = require("./server/routes/user");
 
 var app = express();
 app.use(bodyParser.json({limit:"50mb"}));
@@ -36,6 +38,10 @@ app.use("/api/timesheet",timesheetRoutes);
 app.use("/api/auth", authRoute);
 // Route for Uploading fies
 app.use("/api/upload", uploadRoutes);
+// Routes for Events
+app.use("/api/event", eventRoutes);
+// Routes for Users
+app.use("/api/user", userRoutes);
 // Dummy index route for API
 app.use("/api", indexRoute);
 

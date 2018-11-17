@@ -1,71 +1,70 @@
 import React, { Component } from "react";
 import NavBar from "./Nav_Bar.js";
+import CardColumns from 'react-bootstrap/lib/CardColumns';
+import EventCard from './Event';
+import Jumbotron from 'react-bootstrap/lib/Jumbotron'
+import Container from 'react-bootstrap/lib/Container'
 
-import Carousel from "react-bootstrap/lib/Carousel";
 
 class Home extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      events: [],
+      isLoading: true
+    }
+    this.renderEventCards = this.renderEventCards.bind(this);
+  }
+
+  componentDidMount() {
+    fetch("/api/event")
+    .then(res => {
+      return res.text()
+    }).then(res => {
+      var array = JSON.parse(res);
+      this.setState({events: array, isLoading: false})
+    })
+  }
+
+  renderEventCards() {
+    let events = this.state.events
+    return events.map(function (event) {
+      return <EventCard event={event} key={event._id}/>
+    })
   }
 
   render() {
-    return (
-      <div className="App">
-        <NavBar />
+    if (this.state.isLoading) {
+      return (
         <div>
-          <Carousel>
-            <Carousel.Item>
-              <img
-                className="d-block w-100 img-responsive"
-                src={require("../images/image1.jpg")}
-                alt="First slide"
-                width={700}
-                height={800}
-              />
-              <Carousel.Caption
-                style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-              >
-                <h3>First slide label</h3>
-                <p>
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                </p>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src={require("../images/image2.jpg")}
-                alt="Second slide"
-                width={700}
-                height={800}
-              />
-
-              <Carousel.Caption>
-                <h3>Second slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src={require("../images/image3.jpg")}
-                alt="Third slide"
-                width={700}
-                height={800}
-              />
-
-              <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
-                </p>
-              </Carousel.Caption>
-            </Carousel.Item>
-          </Carousel>
+          <NavBar />
+          <img src={require('../images/loading.jpg')} style={{
+            position: "absolute",
+            top: "10", left: "0", right: "0", bottom: "0",
+            margin: "auto"
+          }} />
+        </div>
+      )
+    } else {
+    return (
+      <div>
+        <NavBar />
+        <div className="container-fluid" style={{marginTop: '2%'}}>
+          {
+            this.state.events.length > 0 ?
+              <CardColumns>
+                {this.renderEventCards()}
+              </CardColumns>
+            :
+              <Jumbotron>
+                    <h1>No events to display</h1>
+              </Jumbotron>
+              }
         </div>
       </div>
     );
+            }
   }
 }
 
