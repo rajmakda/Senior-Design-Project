@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-
+import User from './components/User'
 import Home from "./components/home";
 import Login from './components/login';
 import Signup from './components/signup';
@@ -59,6 +59,7 @@ const Router = () => (
                 <AdminRoute path='/gia' component={upload} />
                 <AdminRoute path='/schedule' component={schedule} />
                 <AdminRoute path='/display-timesheet' component={DisplayTimesheets}/>
+                <AdminRoute path='/users' component={User}/>
                 <Route path='/' component={Home} />
             </Switch>
         </Provider>

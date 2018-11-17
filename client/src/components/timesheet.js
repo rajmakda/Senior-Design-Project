@@ -28,7 +28,7 @@ class timesheet extends Component {
             this.state.to = from.toDateInputValue()
         } else {
             var date = new Date();
-            var lastDay = new Date(date.getFullYear(), date.getMonth(), 0);
+            var lastDay = new Date(date.getFullYear(), date.getMonth()+1, 0);
             this.state.to = lastDay.toDateInputValue()
         }
         

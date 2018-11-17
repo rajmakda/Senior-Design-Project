@@ -41,7 +41,7 @@ app.use("/api/upload", uploadRoutes);
 // Routes for Events
 app.use("/api/event", eventRoutes);
 // Routes for Users
-app.use("/api/user", userRoutes);
+app.use("/api/users", userRoutes);
 // Dummy index route for API
 app.use("/api", indexRoute);
 

@@ -57,6 +57,7 @@ class NavBar extends React.Component {
           <Nav.Link href="/schedule">Schedule</Nav.Link>
           <Nav.Link href="/gia">Upload</Nav.Link>
           <Nav.Link href="/display-timesheet">Timesheets</Nav.Link>
+          <Nav.Link href="/users">Users</Nav.Link>
         </span>
       )
     } else if (this.state.isLoggedIn) {
