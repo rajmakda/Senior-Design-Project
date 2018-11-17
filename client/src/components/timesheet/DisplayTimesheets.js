@@ -3,6 +3,7 @@ import {Form, FormGroup, FormLabel, FormControl, Row, Button} from 'react-bootst
 import { connect } from 'react-redux';
 import { getTimeSheets } from '../../actions/timesheetActions';
 import TimeSheetTable from './TimesheetTable';
+import NavBar from '../Nav_Bar';
 
 class DisplayTimesheets extends Component {
 
@@ -32,28 +33,31 @@ class DisplayTimesheets extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className='jumbotron'>
-                <h1 className='display-4'>Time Sheets</h1>
+        <div>
+            <NavBar/>
+            <div className="container-fluid" style={{ marginTop: '4%' }}>
+                <div className='jumbotron'>
+                    <h1 className='display-4'>Time Sheets</h1>
+                </div>
+                <h4 className="mb-4">Select the dates below: </h4>
+                <Form onSubmit={this.onSubmit}>
+                    <Row>
+                        <FormGroup className="col-md-3">
+                            <FormLabel>From</FormLabel>
+                            <FormControl name="fromDate" type="date" value={this.state.fromDate} onChange={this.handleInputChange} required />
+                        </FormGroup>
+                        <FormGroup className="col-md-3">
+                            <FormLabel>To</FormLabel>
+                            <FormControl name="toDate" type="date" value={this.state.toDate} onChange={this.handleInputChange} required />
+                        </FormGroup>
+                    </Row>
+                    <Row>
+                        <Button variant="success" style={{ marginRight: '1%' }} type="submit">Submit</Button>
+                    </Row>
+                </Form>
+                <TimeSheetTable />
+            </div>
         </div>
-        <h4 className="mb-4">Select the dates below: </h4>
-        <Form onSubmit={this.onSubmit}>
-            <Row>
-                <FormGroup className="col-md-3">
-                    <FormLabel>From</FormLabel>
-                    <FormControl name="fromDate" type="date" value={this.state.fromDate} onChange={this.handleInputChange} required/>
-                </FormGroup>
-                <FormGroup className="col-md-3">
-                    <FormLabel>To</FormLabel>
-                    <FormControl name="toDate" type="date" value={this.state.toDate} onChange={this.handleInputChange} required/>
-                </FormGroup>
-            </Row>
-            <Row>
-                <Button variant="success" style={{marginRight:'1%'}} type="submit">Submit</Button>
-            </Row>
-        </Form>
-        <TimeSheetTable />
-      </div>
     )
   }
 }
