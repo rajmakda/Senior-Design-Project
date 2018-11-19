@@ -19,4 +19,12 @@ router.put("/:id", middleware.verifyToken, middleware.checkAdmin, function(req, 
     });
 });
 
+router.delete("/:id", middleware.verifyToken, middleware.checkAdmin, function(req, res) {
+    let id = req.params.id;
+    User.findByIdAndDelete(id,function(err) {
+        if (err) return next(err);
+        return res.send("Successfully deleted");
+    });
+});
+
 module.exports = router;

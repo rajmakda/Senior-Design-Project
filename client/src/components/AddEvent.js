@@ -18,9 +18,9 @@ class AddEvent extends Component {
             description: "",
             imgPath: "",
             owner: "",
-            isLoggedIn: "",
-            isRA: "",
-            isAdmin: ""
+            isLoggedIn: false,
+            isRA: false,
+            isAdmin: false
         }
         this.fileInput = React.createRef();
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,11 +34,9 @@ class AddEvent extends Component {
     componentDidMount() {
         this.setState({
             isLoggedIn: localStorage.getItem('auth') == 'true',
-            isRA: localStorage.getItem('user').typeofuser == 'RA',
-            isAdmin: localStorage.getItem('user').typeofuser == 'admin'
         })
         let eventId = this.props.eventid;
-        if (eventId != undefined && (this.state.isAdmin || this.state.isRA)) {
+        if (eventId != undefined && localStorage.getItem('auth') == 'true' && (JSON.parse(localStorage.getItem('user')).typeofuser == 'admin' || JSON.parse(localStorage.getItem('user')).typeofuser == 'RA')) {
             let url = "/api/event/"+eventId
             fetch(url, {
                 headers: {
