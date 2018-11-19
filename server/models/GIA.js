@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const GIASchema = new Schema({
-    sjsuid: {type: Number, index: true, required: true},
+    sjsuid: {type: Number, index: true, required: true, unique: true},
     email: String,
     timesheets: [{
         timeperiod: {

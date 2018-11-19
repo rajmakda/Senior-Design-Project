@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-
+import User from './components/User'
 import Home from "./components/home";
 import Login from './components/login';
 import Signup from './components/signup';
@@ -30,6 +30,25 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
+const userisAdmin = userisAuthenticated && JSON.parse(localStorage.getItem("user")).typeofuser == "admin";
+const AdminRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      userisAdmin ? (
+        <Component {...props} />
+      ) : (
+          <Redirect
+            to={{
+              pathname: "/unauthorized",
+              state: { from: props.location }
+            }}
+          />
+        )
+    }
+  />
+);
+
 const Router = () => (
     <main>
         <Provider store={ store }>
@@ -37,9 +56,10 @@ const Router = () => (
                 <Route path='/login' component={Login} />
                 <Route path='/register' component={Signup} />
                 <PrivateRoute path='/timesheet' component={timesheet} />
-                <PrivateRoute path='/gia' component={upload} />
-                <PrivateRoute path='/schedule' component={schedule} />
-                <PrivateRoute path='/display-timesheet' component={DisplayTimesheets}/>
+                <AdminRoute path='/gia' component={upload} />
+                <AdminRoute path='/schedule' component={schedule} />
+                <AdminRoute path='/display-timesheet' component={DisplayTimesheets}/>
+                <AdminRoute path='/users' component={User}/>
                 <Route path='/' component={Home} />
             </Switch>
         </Provider>
