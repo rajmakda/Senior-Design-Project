@@ -25,8 +25,10 @@ router.get("/", function(req, res) {
     Event.find({expired: 'false'}, function(err, events) {
         if (err) return next(err);
         events.forEach(function(event) {
-            console.log(event.when);
-            if (new Date()+1 > new Date(event.when)) {
+            let myDate = new Date()
+            myDate.setDate(myDate.getDate() - 1) 
+            let eventDate = new Date(event.when)
+            if (myDate.getTime() > eventDate.getTime()) {
                 event.expired = true;
                 expired.push(event);
             } else {

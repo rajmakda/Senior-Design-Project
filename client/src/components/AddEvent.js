@@ -58,8 +58,10 @@ class AddEvent extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        let d = new Date(this.state.when)
+        d.setHours(24, 0, 0, 0);
         let event = {
-            when: this.state.when,
+            when: d,
             where: this.state.where,
             title: this.state.title,
             description: this.state.description,

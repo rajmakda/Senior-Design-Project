@@ -51,7 +51,7 @@ class Event extends Component {
     render() {
         let event = this.props.event;
         let date = new Date(event.when);
-        let dateString = date.toDateString(0);
+        let dateString = date.toDateString()
         let imgPath = "/api/event/image/"+event.imgPath.split("/").pop();
         return (
             <div>
